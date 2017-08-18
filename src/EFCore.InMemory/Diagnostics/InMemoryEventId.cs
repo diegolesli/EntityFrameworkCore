@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
@@ -31,7 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         }
 
         private static readonly string _transactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
-        private static EventId MakeTransactionId(Id id) => new EventId((int)id, _transactionPrefix + id);
+        private static EventId MakeTransactionId(Id id) => EventIdFactory.Create((int)id, _transactionPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -47,7 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId TransactionIgnoredWarning = MakeTransactionId(Id.TransactionIgnoredWarning);
 
         private static readonly string _updatePrefix = DbLoggerCategory.Update.Name + ".";
-        private static EventId MakeUpdateId(Id id) => new EventId((int)id, _updatePrefix + id);
+        private static EventId MakeUpdateId(Id id) => EventIdFactory.Create((int)id, _updatePrefix + id);
 
         /// <summary>
         ///     <para>

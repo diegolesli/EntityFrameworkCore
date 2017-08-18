@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
@@ -67,7 +68,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         }
 
         private static readonly string _connectionPrefix = DbLoggerCategory.Database.Connection.Name + ".";
-        private static EventId MakeConnectionId(Id id) => new EventId((int)id, _connectionPrefix + id);
+        private static EventId MakeConnectionId(Id id) => EventIdFactory.Create((int)id, _connectionPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -135,7 +136,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId ConnectionError = MakeConnectionId(Id.ConnectionError);
 
         private static readonly string _sqlPrefix = DbLoggerCategory.Database.Command.Name + ".";
-        private static EventId MakeCommandId(Id id) => new EventId((int)id, _sqlPrefix + id);
+        private static EventId MakeCommandId(Id id) => EventIdFactory.Create((int)id, _sqlPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -177,7 +178,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId CommandError = MakeCommandId(Id.CommandError);
 
         private static readonly string _transactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
-        private static EventId MakeTransactionId(Id id) => new EventId((int)id, _transactionPrefix + id);
+        private static EventId MakeTransactionId(Id id) => EventIdFactory.Create((int)id, _transactionPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -284,7 +285,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId DataReaderDisposing = MakeCommandId(Id.DataReaderDisposing);
 
         private static readonly string _migrationsPrefix = DbLoggerCategory.Migrations.Name + ".";
-        private static EventId MakeMigrationsId(Id id) => new EventId((int)id, _migrationsPrefix + id);
+        private static EventId MakeMigrationsId(Id id) => EventIdFactory.Create((int)id, _migrationsPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -379,7 +380,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId MigrationsNotFound = MakeMigrationsId(Id.MigrationsNotFound);
 
         private static readonly string _queryPrefix = DbLoggerCategory.Query.Name + ".";
-        private static EventId MakeQueryId(Id id) => new EventId((int)id, _queryPrefix + id);
+        private static EventId MakeQueryId(Id id) => EventIdFactory.Create((int)id, _queryPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -418,7 +419,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public static readonly EventId QueryPossibleExceptionWithAggregateOperator = MakeQueryId(Id.QueryPossibleExceptionWithAggregateOperator);
 
         private static readonly string _validationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
-        private static EventId MakeValidationId(Id id) => new EventId((int)id, _validationPrefix + id);
+        private static EventId MakeValidationId(Id id) => EventIdFactory.Create((int)id, _validationPrefix + id);
 
         /// <summary>
         ///     <para>
