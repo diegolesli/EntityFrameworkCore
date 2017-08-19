@@ -29,6 +29,8 @@ namespace Microsoft.EntityFrameworkCore
                 .AddDbContextPool<TContext>(
                     ob => ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString),
                     poolSize)
+                .AddDbContextPool<SecondContext>(
+                    ob => ob.UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString))
                 .BuildServiceProvider();
 
         private class PooledContext : DbContext
@@ -71,6 +73,14 @@ namespace Microsoft.EntityFrameworkCore
             {
                 public string CustomerId { get; set; }
                 public string CompanyName { get; set; }
+            }
+        }
+
+        private class SecondContext : DbContext
+        {
+            public SecondContext(DbContextOptions options)
+                : base(options)
+            {
             }
         }
 
